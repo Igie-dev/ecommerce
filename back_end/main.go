@@ -25,13 +25,10 @@ func main() {
 
 	app.Static("/", "./public")
 
-	//!Sample get request
-	app.Get("/user", func(c *fiber.Ctx) error {
-		return c.SendString("I'm a GET request!")
-	})
-
 	//Home routes
 	routes.RootRoutes(app)
+	//User routes
+	routes.UserRoutes(app)
 
 	// Define a middleware to handle all routes
 	app.Use(func(c *fiber.Ctx) error {
