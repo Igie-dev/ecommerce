@@ -5,7 +5,6 @@ import (
 	"os"
 	"path"
 
-	"ecommerce.com/api/config"
 	"ecommerce.com/api/lib"
 	"ecommerce.com/api/routes"
 	"github.com/gofiber/fiber/v2"
@@ -16,12 +15,7 @@ func main() {
 	app := fiber.New()
 	lib.Loaddotenv()
 	//Cors
-	app.Use(cors.New(cors.Config{
-		AllowOrigins:     config.Allowed_origins(),
-		AllowHeaders:     "Origin, Content-Type, Accept,Option,Authorization,authorization",
-		AllowMethods:     "GET,POST,HEAD,PUT,DELETE,PATCH",
-		AllowCredentials: true,
-	}))
+	app.Use(cors.New(lib.CorsConfig))
 
 	app.Static("/", "./public")
 

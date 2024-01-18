@@ -1,2 +1,5 @@
 front_end/node_modules
 front_end/.env
+
+back_end/.env
+back_end/tmp
