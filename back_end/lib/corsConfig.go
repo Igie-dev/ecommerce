@@ -1,8 +1,8 @@
 package lib
 
 import (
-	"ecommerce.com/api/config"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/laptop.api/config"
 )
 
 var CorsConfig = cors.Config{

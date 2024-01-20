@@ -5,10 +5,10 @@ import (
 	"os"
 	"path"
 
-	"ecommerce.com/api/lib"
-	"ecommerce.com/api/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/laptop.api/lib"
+	"github.com/laptop.api/routes"
 )
 
 func main() {

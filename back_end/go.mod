@@ -1,4 +1,4 @@
-module ecommerce.com/api
+module github.com/laptop.api
 
 go 1.21.5
 
