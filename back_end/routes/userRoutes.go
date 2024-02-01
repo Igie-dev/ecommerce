@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/laptop.api/controller"
+	"github.com/laptop-shop.api/controller"
 )
 
 func UserRoutes(app *fiber.App) {

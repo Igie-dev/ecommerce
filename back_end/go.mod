@@ -1,4 +1,4 @@
-module github.com/laptop.api
+module github.com/laptop-shop.api
 
 go 1.21.5
 

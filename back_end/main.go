@@ -7,8 +7,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/laptop.api/lib"
-	"github.com/laptop.api/routes"
+	"github.com/laptop-shop.api/lib"
+	"github.com/laptop-shop.api/routes"
 )
 
 func main() {

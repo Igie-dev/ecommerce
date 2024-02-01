@@ -2,7 +2,7 @@ package lib
 
 import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/laptop.api/config"
+	"github.com/laptop-shop.api/config"
 )
 
 var CorsConfig = cors.Config{
