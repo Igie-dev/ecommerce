@@ -1,9 +1,4 @@
-<app-main-header></app-main-header>
-
-<!-- Router Loader -->
-
-<div *ngIf="isLoading" class="flex items-center justify-center h-[80vh] w-full">
-  <span class="loading loading-spinner loading-md"></span>
-</div>
-
-<router-outlet></router-outlet>
+<main class="flex flex-col w-screen">
+  <app-main-header></app-main-header>
+  <router-outlet></router-outlet>
+</main>
