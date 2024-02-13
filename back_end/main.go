@@ -14,6 +14,11 @@ import (
 func main() {
 	app := fiber.New()
 	lib.Loaddotenv()
+
+	//Open database
+	lib.DbConnection()
+	defer lib.CloseDatabase()
+
 	//Cors
 	app.Use(cors.New(lib.CorsConfig))
 
@@ -22,7 +27,7 @@ func main() {
 	//Home routes
 	routes.RootRoutes(app)
 	//User routes
-	routes.UserRoutes(app)
+	routes.CustomerRoute(app)
 
 	// Define a middleware to handle all routes
 	app.Use(func(c *fiber.Ctx) error {
