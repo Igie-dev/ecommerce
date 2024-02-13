@@ -3,12 +3,20 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { LucideAngularModule, ShoppingCart, Search } from 'lucide-angular';
+import {
+  LucideAngularModule,
+  ShoppingCart,
+  Search,
+  Facebook,
+  Instagram,
+} from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
-    importProvidersFrom(LucideAngularModule.pick({ ShoppingCart, Search })),
+    importProvidersFrom(
+      LucideAngularModule.pick({ ShoppingCart, Search, Facebook, Instagram })
+    ),
   ],
 };

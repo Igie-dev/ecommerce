@@ -9,6 +9,6 @@
 
 @layer utilities {
   .custom_container_media {
-    @apply px-2 sm:w-[95%] md:w-[90%] xl:w-[95%] 2xl:w-[80%];
+    @apply px-2 sm:px-5 md:px-10 xl:px-20 2xl:px-32;
   }
 }
