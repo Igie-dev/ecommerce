@@ -3,3 +3,4 @@ front_end/.env
 
 back_end/.env
 back_end/tmp
+back_end/.main.go.swp
