@@ -1,12 +1,14 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/laptop-shop.api/config"
 	"github.com/laptop-shop.api/lib"
 	"github.com/laptop-shop.api/routes"
 )
@@ -16,8 +18,16 @@ func main() {
 	lib.Loaddotenv()
 
 	//Open database
-	lib.DbConnection()
-	defer lib.CloseDatabase()
+	db, err := lib.DbConnection(config.GetDbConfig())
+
+	if err != nil {
+		fmt.Println("Database connection error", err)
+	}
+	r := routes.Repository{
+		DB: db,
+	}
+
+	// defer lib.CloseDatabase()
 
 	//Cors
 	app.Use(cors.New(lib.CorsConfig))
@@ -26,8 +36,9 @@ func main() {
 
 	//Home routes
 	routes.RootRoutes(app)
+
 	//User routes
-	routes.CustomerRoute(app)
+	r.CustomerRoute(app)
 
 	// Define a middleware to handle all routes
 	app.Use(func(c *fiber.Ctx) error {
