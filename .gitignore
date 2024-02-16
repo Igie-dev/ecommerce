@@ -2,5 +2,7 @@ front_end/node_modules
 front_end/.env
 
 back_end/.env
+back_end/go.sum
+back_end/uploads
 back_end/tmp
 back_end/.main.go.swp
