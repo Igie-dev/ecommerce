@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 @Component({
   selector: 'app-header-profile',
   standalone: true,
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
 })
 export class ProfileComponent {
   profile_img_src =
-    'http://localhost:4200/assets/414103125_1440158746916029_2014991615104848722_n.jpg';
+    'assets/414103125_1440158746916029_2014991615104848722_n.jpg';
 }
