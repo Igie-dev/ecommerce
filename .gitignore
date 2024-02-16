@@ -6,3 +6,8 @@ back_end/go.sum
 back_end/uploads
 back_end/tmp
 back_end/.main.go.swp
+back_end/*.exe
+back_end/*.exe~
+back_end/*.dll
+back_end/*.so
+back_end/*.dylib
