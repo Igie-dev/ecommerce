@@ -27,8 +27,6 @@ func main() {
 		DB: db,
 	}
 
-	// defer lib.CloseDatabase()
-
 	//Cors
 	app.Use(cors.New(lib.CorsConfig))
 

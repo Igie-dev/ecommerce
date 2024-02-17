@@ -2,6 +2,8 @@ package utils
 
 import (
 	"errors"
+	"fmt"
+	"strings"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
@@ -25,7 +27,9 @@ var validate = validator.New()
 
 // Validate customer data
 func ValidateCustomer(c *fiber.Ctx) error {
-	var validationErrors []*ErrorResponse
+	// var validationErrors []*ErrorResponse
+	var errField []string
+
 	var mr *MalformedRequest
 
 	body := new(model.Customer)
@@ -41,13 +45,18 @@ func ValidateCustomer(c *fiber.Ctx) error {
 
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
-			var el ErrorResponse
-			el.FailedField = err.Field()
-			el.Tag = err.Tag()
-			el.Value = err.Param()
-			validationErrors = append(validationErrors, &el)
+			errField = append(errField, err.Field())
 		}
-		return c.Status(fiber.StatusBadRequest).JSON(validationErrors)
+
+		isOrare := "is"
+
+		if len(errField) > 1 {
+			isOrare = "are"
+		}
+
+		errmsg := fmt.Sprintf("%s field %s required", strings.Join(errField, " , "), isOrare)
+
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"message": errmsg})
 	}
 	return c.Next()
 }
