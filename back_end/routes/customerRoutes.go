@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
@@ -11,27 +11,49 @@ import (
 	"gorm.io/gorm"
 )
 
-type Repository struct {
+type CustomerRepository struct {
 	DB *gorm.DB
 }
 
-func (r *Repository) CustomerRoute(app *fiber.App) {
+func (r *CustomerRepository) CustomerRoutes(app *fiber.App) {
+
 	api := app.Group("/customer")
-	MigrateCustomer(r.DB)
+
+	//Model
+	customerModel := &model.Customer{}
+
+	//Migration
+	err := r.MigrateCustomer(customerModel)
+
+	if err != nil {
+		fmt.Println("Error migrating customer model:", err)
+	}
+
+	//JSONBody validation
+	validateCustomerMiddleWare := func(ctx *fiber.Ctx) error {
+		return utils.ValidateJSONBody(customerModel, ctx)
+	}
+
+	//Routes
 	api.Get("/", r.GetAllCustomer)
-	api.Post("/", utils.ValidateCustomer, r.CreateNewCustomer)
+	api.Post("/", validateCustomerMiddleWare, r.CreateNewCustomer)
+
 }
 
-//Migrate
+//*Controllers
 
-func MigrateCustomer(db *gorm.DB) error {
-	err := db.AutoMigrate(&model.Customer{})
+// Migrate
+func (r *CustomerRepository) MigrateCustomer(model interface{}) error {
+	err := r.DB.AutoMigrate(model)
+	if err != nil {
+		fmt.Println("Error migrating customer model:", err)
+		// Handle the error, e.g., log it or return an error response
+	}
 	return err
 }
 
 // Create
-func (r *Repository) CreateNewCustomer(c *fiber.Ctx) error {
-	var mr *utils.MalformedRequest
+func (r *CustomerRepository) CreateNewCustomer(ctx *fiber.Ctx) error {
 
 	u := uuid.New()
 	//Create user from data and add cutomer id by generating randum string
@@ -39,41 +61,33 @@ func (r *Repository) CreateNewCustomer(c *fiber.Ctx) error {
 		CustomerId: u,
 	}
 
-	err := utils.DecodeJSONBody(c, &customer)
+	err := r.DB.Create(&customer).Error
 
 	if err != nil {
-		if errors.As(err, &mr) {
-			return c.Status(mr.Status).JSON(fiber.Map{"message": mr.Msg})
-		}
-	}
-
-	err = r.DB.Create(&customer).Error
-
-	if err != nil {
-		c.Status(http.StatusBadRequest).JSON(&fiber.Map{"message": "Failed to create customer"})
+		ctx.Status(http.StatusBadRequest).JSON(&fiber.Map{"message": "Failed to create customer"})
 		return nil
 	}
-	return c.Status(http.StatusCreated).JSON(&fiber.Map{"message": "Customer created successfully"})
+	return ctx.Status(http.StatusCreated).JSON(&fiber.Map{"message": "Customer created successfully"})
 }
 
 // Read
-func (r *Repository) GetAllCustomer(c *fiber.Ctx) error {
+func (r *CustomerRepository) GetAllCustomer(ctx *fiber.Ctx) error {
 
 	customers := &[]model.Customer{}
 
 	err := r.DB.Find(&customers).Error
 
 	if err != nil {
-		c.Status(http.StatusNotFound).JSON(&fiber.Map{"message": "No customer found"})
+		ctx.Status(http.StatusNotFound).JSON(&fiber.Map{"message": "No customer found"})
 		return nil
 	}
 
 	if len(*customers) <= 0 {
-		c.Status(http.StatusNotFound).JSON(&fiber.Map{"message": "No customer found"})
+		ctx.Status(http.StatusNotFound).JSON(&fiber.Map{"message": "No customer found"})
 		return nil
 	}
 
-	return c.Status(200).JSON(fiber.Map{
+	return ctx.Status(200).JSON(fiber.Map{
 		"data": customers,
 	})
 }

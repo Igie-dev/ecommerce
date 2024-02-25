@@ -7,7 +7,6 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
-	"github.com/laptop-shop.api/model"
 )
 
 type (
@@ -26,22 +25,21 @@ type (
 var validate = validator.New()
 
 // Validate customer data
-func ValidateCustomer(c *fiber.Ctx) error {
+func ValidateJSONBody(model interface{}, c *fiber.Ctx) error {
 	// var validationErrors []*ErrorResponse
 	var errField []string
 
 	var mr *MalformedRequest
 
-	body := new(model.Customer)
-
-	err := DecodeJSONBody(c, &body)
+	err := DecodeJSONBody(c, model)
 
 	if err != nil {
 		if errors.As(err, &mr) {
 			return c.Status(mr.Status).JSON(fiber.Map{"message": mr.Msg})
 		}
 	}
-	err = validate.Struct(body)
+
+	err = validate.Struct(model)
 
 	if err != nil {
 		for _, err := range err.(validator.ValidationErrors) {

@@ -21,9 +21,12 @@ func main() {
 	db, err := lib.DbConnection(config.GetDbConfig())
 
 	if err != nil {
-		fmt.Println("Database connection error", err)
+		log.Fatal("Cannot connect to db: ", err)
+		// fmt.Println("Database connection error", err)
 	}
-	r := routes.Repository{
+
+	fmt.Println("Db:", db)
+	customerRepo := routes.CustomerRepository{
 		DB: db,
 	}
 
@@ -36,7 +39,7 @@ func main() {
 	routes.RootRoutes(app)
 
 	//User routes
-	r.CustomerRoute(app)
+	customerRepo.CustomerRoutes(app)
 
 	// Define a middleware to handle all routes
 	app.Use(func(c *fiber.Ctx) error {

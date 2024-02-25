@@ -16,8 +16,8 @@ func DbConnection(config *config.DBConfig) (*gorm.DB, error) {
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
-		log.Fatal("Database connection error", err)
-		return db, err
+		log.Printf("Database connection error: %v", err)
+		return nil, err
 	}
 	return db, nil
 
