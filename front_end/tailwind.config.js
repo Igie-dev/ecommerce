@@ -1,11 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,ts}"],
+  presets: [require("@spartan-ng/ui-core/hlm-tailwind-preset")],
+  content: ["./src/**/*.{html,ts}", "./src/app/libs/ui/**/*.{html,ts}"],
   theme: {
     extend: {},
   },
-  daisyui: {
-    themes: ["cmyk"],
-  },
-  plugins: [require("daisyui")],
+  plugins: [],
 };
