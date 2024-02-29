@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { MainHeaderComponent } from './components/mainHeader/main-header.component';
-import { MainFooterComponent } from './components/mainFooter/main-footer/main-footer.component';
+import { MainHeaderComponent } from './shared/ui/mainHeader/main-header.component';
+import { MainFooterComponent } from './shared/ui/mainFooter/main-footer/main-footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
