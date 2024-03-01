@@ -10,6 +10,8 @@ import {
   Facebook,
   Instagram,
   Menu,
+  Phone,
+  Check,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -23,6 +25,9 @@ export const appConfig: ApplicationConfig = {
         Facebook,
         Instagram,
         Menu,
+
+        Phone,
+        Check,
       })
     ),
   ],
