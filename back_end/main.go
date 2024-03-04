@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path"
@@ -9,7 +8,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/laptop-shop.api/config"
+	"github.com/laptop-shop.api/database"
 	"github.com/laptop-shop.api/lib"
+	"github.com/laptop-shop.api/middleware"
 	"github.com/laptop-shop.api/routes"
 )
 
@@ -18,28 +19,26 @@ func main() {
 	lib.Loaddotenv()
 
 	//Open database
-	db, err := lib.DbConnection(config.GetDbConfig())
+	err := database.ConnectDB()
 
 	if err != nil {
-		log.Fatal("Cannot connect to db: ", err)
-		// fmt.Println("Database connection error", err)
+		log.Panicf("Cannot connect to db: %v", err)
 	}
 
-	fmt.Println("Db:", db)
-	customerRepo := routes.CustomerRepository{
-		DB: db,
-	}
+	// Attach Middlewares.
+	middleware.FiberMiddleware(app)
 
 	//Cors
-	app.Use(cors.New(lib.CorsConfig))
+	app.Use(cors.New(config.CorsConfig))
 
 	app.Static("/", "./public")
 
 	//Home routes
 	routes.RootRoutes(app)
 
-	//User routes
-	customerRepo.CustomerRoutes(app)
+	//Customer routes
+
+	routes.CustomerRoutes(app)
 
 	// Define a middleware to handle all routes
 	app.Use(func(c *fiber.Ctx) error {
@@ -57,5 +56,5 @@ func main() {
 		}
 	})
 
-	log.Fatal(app.Listen(":" + os.Getenv("PORT")))
+	log.Fatal(app.Listen(":" + os.Getenv("APP_PORT")))
 }

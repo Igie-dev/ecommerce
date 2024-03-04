@@ -12,6 +12,7 @@ require (
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/pgx/v5 v5.4.3 // indirect
@@ -32,8 +33,10 @@ require (
 	github.com/cosmtrek/air v1.49.0 // indirect
 	github.com/creack/pty v1.1.21 // indirect
 	github.com/fatih/color v1.16.0 // indirect
+	github.com/form3tech-oss/jwt-go v3.2.5+incompatible
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/go-playground/validator/v10 v10.18.0
+	github.com/gofiber/jwt/v2 v2.2.7
 	github.com/gohugoio/hugo v0.121.2 // indirect
 	github.com/google/uuid v1.5.0
 	github.com/klauspost/compress v1.17.0 // indirect
@@ -43,6 +46,7 @@ require (
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.1 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
+	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/afero v1.11.0 // indirect
 	github.com/tdewolff/parse/v2 v2.7.7 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
