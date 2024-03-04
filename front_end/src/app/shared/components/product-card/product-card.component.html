@@ -1,4 +1,4 @@
-<div class="h-[30rem] w-[18rem] flex flex-col gap-2 p-5">
+<div class="h-[28rem] w-[18rem] flex flex-col gap-2 p-5">
   @if(product.isStock){
   <span class="flex items-center gap-2 text-green-500">
     <lucide-icon name="check" [size]="15" [strokeWidth]="2.5"></lucide-icon>
@@ -23,9 +23,9 @@
     <div class="flex items-center w-full h-8 gap-4">
       <p class="text-sm opacity-50">Reviews ({{ product.reviews }})</p>
     </div>
-    <h1 class="text-lg h-[4rem] w-full">
-      @if(product.description && product.description.length > 45){
-      {{ product.description | slice : 0 : 45 }} ... } @else {
+    <h1 class="text-sm h-[4rem] w-full">
+      @if(product.description.length > 90){
+      {{ product.description | slice : 0 : 90 }} ... } @else {
       {{ product.description }} }
     </h1>
     <div class="flex flex-col justify-end flex-1 w-full">
