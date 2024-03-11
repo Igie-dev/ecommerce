@@ -20,19 +20,19 @@ type (
 		Password   string     `json:"password"`
 	}
 	CreateCustomer struct {
-		CustomerId uuid.UUID `json:"customer_id" `
-		LastName   string    `gorm:"not null; unique" validate:"required,min=1,max=100" json:"last_name" `
-		FirstName  string    `gorm:"not null; unique" validate:"required,min=1,max=100" json:"first_name" `
-		Email      string    `gorm:"->;<-:create; not null; unique" validate:"required,min=1,max=100"  json:"email" `
-		Contact    string    `gorm:"not null; unique" validate:"required,min=10,max=11" json:"contact" `
+		CustomerId uuid.UUID `json:"customer_id" validate:"required"`
+		LastName   string    `json:"last_name" gorm:"not null; unique" validate:"required,min=1,max=100"  `
+		FirstName  string    `json:"first_name" gorm:"not null; unique" validate:"required,min=1,max=100"  `
+		Email      string    `json:"email" gorm:"->;<-:create; not null; unique" validate:"required,min=1,max=100"   `
+		Contact    string    `json:"contact" gorm:"not null; unique" validate:"required,min=10,max=11"  `
 		Password   string    `json:"password" validate:"required,lte=100,gte=10"`
 	}
 
 	UpdateCustomer struct {
-		CustomerId uuid.UUID `json:"customer_id" `
-		LastName   string    `gorm:"not null; unique" validate:"required,min=1,max=100" json:"last_name" `
-		FirstName  string    `gorm:"not null; unique" validate:"required,min=1,max=100" json:"first_name" `
-		Email      string    `gorm:"->;<-:create; not null; unique" validate:"required,min=1,max=100"  json:"email" `
-		Contact    string    `gorm:"not null; unique" validate:"required,min=10,max=11" json:"contact" `
+		CustomerId uuid.UUID `json:"customer_id" validate:"required"`
+		LastName   string    `json:"last_name" gorm:"not null; unique" validate:"required,min=1,max=100"  `
+		FirstName  string    `json:"first_name" gorm:"not null; unique" validate:"required,min=1,max=100"  `
+		Email      string    `json:"email" gorm:"->;<-:create; not null; unique" validate:"required,min=1,max=100"   `
+		Contact    string    `json:"contact" gorm:"not null; unique" validate:"required,min=10,max=11"  `
 	}
 )
