@@ -28,6 +28,7 @@ func (db *DB) connection(config *config.DBConfig) (err error) {
 	}
 
 	db.AutoMigrate(&model.Customer{})
+	db.AutoMigrate(&model.Address{})
 
 	return nil
 
