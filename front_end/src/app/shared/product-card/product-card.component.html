@@ -1,0 +1,46 @@
+<div class="h-[28rem] w-[18rem] flex flex-col gap-2 p-5">
+  @if(product.isStock){
+  <span class="flex items-center gap-2 text-green-500">
+    <lucide-icon name="check" [size]="15" [strokeWidth]="2.5"></lucide-icon>
+    <p class="text-xs">in stock</p>
+  </span>
+
+  } @else{
+  <span class="flex items-center gap-2 text-red-500">
+    <lucide-icon name="phone" [size]="15" [strokeWidth]="2.5"></lucide-icon>
+    <p class="text-xs">check availability</p>
+  </span>
+  }
+  <!-- Image -->
+  <img
+    class="w-full h-[15rem] object-contain"
+    loading="lazy"
+    alt="Product image"
+    src="assets/card_img.jpg"
+  />
+
+  <div class="flex flex-col flex-1 w-full gap-2">
+    <div class="flex items-center w-full h-8 gap-4">
+      <p class="text-sm opacity-50">Reviews ({{ product.reviews }})</p>
+    </div>
+    <h1 class="text-sm h-[4rem] w-full">
+      @if(product.description.length > 90){
+      {{ product.description | slice : 0 : 90 }} ... } @else {
+      {{ product.description }} }
+    </h1>
+    <div class="flex flex-col justify-end flex-1 w-full">
+      @if(product.discount_price){
+      <p class="text-sm line-through opacity-50">
+        {{ product.price | currency : "PHP" : "symbol" }}
+      </p>
+      <p class="text-lg font-semibold">
+        {{ product.discount_price | currency : "PHP" : "symbol" }}
+      </p>
+      } @else {
+      <p class="mt-6 text-lg font-semibold">
+        {{ product.price | currency : "PHP" : "symbol" }}
+      </p>
+      }
+    </div>
+  </div>
+</div>

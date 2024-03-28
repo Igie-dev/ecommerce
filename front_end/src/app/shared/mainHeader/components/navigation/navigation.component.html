@@ -1,0 +1,43 @@
+<!-- Mobile -->
+<div class="relative w-full h-full xl:hidden">
+  <button [brnMenuTriggerFor]="menu" hlmBtn variant="ghost" size="sm">
+    <lucide-icon name="menu" [size]="20" [strokeWidth]="2.5"></lucide-icon>
+  </button>
+  <ng-template #menu>
+    <hlm-menu-group>
+      <hlm-menu-group
+        class="flex flex-col items-start gap-5 pt-10 pb-10 pl-5 w-[20rem] text-xs font-medium list-none border bg-background h-fit"
+      >
+        <li><a href="#" class="hover:underline">Laptops</a></li>
+        <li><a href="#" class="hover:underline">Desktop Pcs</a></li>
+        <li><a href="#" class="hover:underline">Networking Devices</a></li>
+        <li><a href="#" class="hover:underline">Printers & Scanners</a></li>
+        <li><a href="#" class="hover:underline">Pc Parts</a></li>
+        <li><a href="#" class="hover:underline">All Other Producs</a></li>
+        <li><a href="#" class="hover:underline">Repaires</a></li>
+        <hlm-menu-separator />
+        <li>
+          <button hlmBtn size="sm">Our Details</button>
+        </li>
+      </hlm-menu-group>
+    </hlm-menu-group>
+  </ng-template>
+</div>
+<!-- Desktop -->
+<nav
+  class="items-center justify-between hidden h-full xl:flex xl:w-full xl:gap-16"
+>
+  <span>Logo</span>
+  <ul class="flex items-center h-full gap-8 text-xs font-medium w-fit">
+    <li><a href="#" class="hover:underline">Laptops</a></li>
+    <li><a href="#" class="hover:underline">Desktop Pcs</a></li>
+    <li><a href="#" class="hover:underline">Networking Devices</a></li>
+    <li><a href="#" class="hover:underline">Printers & Scanners</a></li>
+    <li><a href="#" class="hover:underline">Pc Parts</a></li>
+    <li><a href="#" class="hover:underline">All Other Producs</a></li>
+    <li><a href="#" class="hover:underline">Repaires</a></li>
+    <li>
+      <button hlmBtn size="sm">Our Details</button>
+    </li>
+  </ul>
+</nav>

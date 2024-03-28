@@ -25,7 +25,6 @@ export const appConfig: ApplicationConfig = {
         Facebook,
         Instagram,
         Menu,
-
         Phone,
         Check,
       })
