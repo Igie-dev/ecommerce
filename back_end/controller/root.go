@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/laptop-shop.api/logger"
+	"github.com/laptop-shop_api/logger"
 )
 
 var logr = logger.GetLogger()

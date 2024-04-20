@@ -1,9 +1,0 @@
-/.env
-/go.sum
-/.main.go.swp
-/.uploads
-*.exe
-*.exe~
-*.dll
-*.so
-*.dylib

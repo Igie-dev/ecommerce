@@ -7,11 +7,11 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/laptop-shop.api/config"
-	"github.com/laptop-shop.api/database"
-	"github.com/laptop-shop.api/lib"
-	"github.com/laptop-shop.api/middleware"
-	"github.com/laptop-shop.api/routes"
+	"github.com/laptop-shop_api/config"
+	"github.com/laptop-shop_api/database"
+	"github.com/laptop-shop_api/lib"
+	"github.com/laptop-shop_api/middleware"
+	"github.com/laptop-shop_api/routes"
 )
 
 func main() {
@@ -36,9 +36,9 @@ func main() {
 	//Home routes
 	routes.RootRoutes(app)
 
-	//Customer routes
+	//user routes
 
-	routes.CustomerRoutes(app)
+	routes.UserRoutes(app)
 
 	// Define a middleware to handle all routes
 	app.Use(func(c *fiber.Ctx) error {
@@ -48,7 +48,7 @@ func main() {
 		//Error routes
 		switch c.Accepts("html", "json", "text") {
 		case "html":
-			return c.SendFile(path.Join(".", "views", "error.html"))
+			return c.SendFile(path.Join(".", "views","html", "error.html"))
 		case "json":
 			return c.JSON(fiber.Map{"message": "Not found!"})
 		default:

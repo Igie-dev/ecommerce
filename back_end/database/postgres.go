@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/laptop-shop.api/config"
-	"github.com/laptop-shop.api/model"
+	"github.com/laptop-shop_api/config"
+	"github.com/laptop-shop_api/model"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -27,8 +27,8 @@ func (db *DB) connection(config *config.DBConfig) (err error) {
 		return err
 	}
 
-	db.AutoMigrate(&model.Customer{})
-	db.AutoMigrate(&model.Address{})
+	db.AutoMigrate(&model.User{})
+
 
 	return nil
 

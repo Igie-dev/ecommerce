@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"os"
 	"strings"
 
@@ -10,7 +9,7 @@ import (
 
 func Allowed_origins() string {
 	var frontEndUrl = os.Getenv("FRONT_END_ENDPOINT")
-	var allowedOrigins = []string{fmt.Sprintf("%s", frontEndUrl)}
+	var allowedOrigins = []string{frontEndUrl}
 	allowed := strings.Join(allowedOrigins, ",")
 	return allowed
 }
