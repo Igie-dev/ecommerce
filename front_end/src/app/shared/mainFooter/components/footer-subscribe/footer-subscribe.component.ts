@@ -4,7 +4,7 @@ import { HlmButtonDirective } from '@spartan-ng/ui-button-helm';
 @Component({
   selector: 'app-footer-subscribe',
   standalone: true,
-  imports: [ReactiveFormsModule, HlmButtonDirective],
+  imports: [ReactiveFormsModule],
   templateUrl: './footer-subscribe.component.html',
 })
 export class FooterSubscribeComponent {
