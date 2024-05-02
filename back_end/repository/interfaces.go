@@ -1,8 +1,9 @@
 package repository
 
 import (
+	"laptop-shop-api/model"
+
 	"github.com/google/uuid"
-	"github.com/laptop-shop_api/model"
 )
 
 type UserRepository interface {

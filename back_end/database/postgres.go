@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/laptop-shop_api/config"
-	"github.com/laptop-shop_api/model"
+	"laptop-shop-api/config"
+	"laptop-shop-api/model"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

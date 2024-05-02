@@ -1,6 +1,6 @@
 package dto
 
-import "github.com/laptop-shop_api/model"
+import "laptop-shop-api/model"
 
 func ToUser(c *model.User) *model.User {
 	return &model.User{

@@ -3,8 +3,9 @@ package controller
 import (
 	"strconv"
 
+	"laptop-shop-api/logger"
+
 	"github.com/gofiber/fiber/v2"
-	"github.com/laptop-shop_api/logger"
 )
 
 var logr = logger.GetLogger()

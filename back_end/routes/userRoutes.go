@@ -1,8 +1,9 @@
 package routes
 
 import (
+	"laptop-shop-api/controller"
+
 	"github.com/gofiber/fiber/v2"
-	"github.com/laptop-shop_api/controller"
 )
 
 func UserRoutes(app *fiber.App) {

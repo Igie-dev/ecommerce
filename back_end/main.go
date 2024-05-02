@@ -5,13 +5,14 @@ import (
 	"os"
 	"path"
 
+	"laptop-shop-api/config"
+	"laptop-shop-api/database"
+	"laptop-shop-api/lib"
+	"laptop-shop-api/middleware"
+	"laptop-shop-api/routes"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/laptop-shop_api/config"
-	"github.com/laptop-shop_api/database"
-	"github.com/laptop-shop_api/lib"
-	"github.com/laptop-shop_api/middleware"
-	"github.com/laptop-shop_api/routes"
 )
 
 func main() {
