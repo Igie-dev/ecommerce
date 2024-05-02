@@ -1,19 +1,22 @@
 <form
-  class="flex items-center w-full gap-5 max-w-[30rem] py-2 h-fit xl:w-[30rem]"
+  class="flex flex-col w-full gap-1 max-w-[30rem] md:flex-row py-2 h-fit xl:w-[30rem] md:items-center"
 >
   <input
     type="email"
     id="email"
     placeholder="Your email"
     [formControl]="email"
-    class="flex-1 px-2 text-xs font-light bg-transparent border rounded-md outline-none h-11 border-base-100 ring-base-100"
+    class="h-10 px-2 text-xs font-light bg-transparent border rounded-md outline-none md:flex-1 border-border ring-border"
   />
 
   <button
+    hlmBtn
     type="button"
     (click)="handleSubmitSubscribe()"
+    variant="secondary"
     [disabled]="!email.value"
-    class="btn btn-primary disabled:btn-outline"
+    size="sm"
+
   >
     Subscribe
   </button>
