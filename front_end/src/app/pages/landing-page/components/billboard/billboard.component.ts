@@ -9,7 +9,7 @@ import {
 } from '@spartan-ng/ui-carousel-helm';
 
 @Component({
-  selector: 'landing-page-carousel',
+  selector: 'landing-page-billboard',
   standalone: true,
   imports: [
     HlmCarouselComponent,
@@ -18,9 +18,9 @@ import {
     HlmCarouselNextComponent,
     HlmCarouselPreviousComponent,
   ],
-  templateUrl: './carousel.component.html',
+  templateUrl: './billboard.component.html',
 })
-export class CarouselComponent {
+export class BillboardComponent {
   carouselImages = [
     { id: 1, src: 'assets/hero_carousel_1.png' },
     { id: 2, src: 'assets/hero_carousel_2.jpg' },
