@@ -8,16 +8,10 @@
     [formControl]="email"
     class="h-10 px-2 text-xs font-light bg-transparent border rounded-md outline-none md:flex-1 border-border ring-border"
   />
-
   <button
-    hlmBtn
-    type="button"
+   hlmBtn
+  type='button'
+  variant='secondary'
     (click)="handleSubmitSubscribe()"
-    variant="secondary"
-    [disabled]="!email.value"
-    size="sm"
-
-  >
-    Subscribe
-  </button>
+  >Subscribe</button>
 </form>
