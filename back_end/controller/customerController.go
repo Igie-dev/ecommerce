@@ -1,11 +1,11 @@
 package controller
 
 import (
-	"laptop-shop-api/database"
-	"laptop-shop-api/dto"
-	"laptop-shop-api/model"
-	repo "laptop-shop-api/repository"
-	vldt "laptop-shop-api/validator"
+	"laptop-shop/database"
+	"laptop-shop/dto"
+	"laptop-shop/model"
+	repo "laptop-shop/repository"
+	vldt "laptop-shop/validator"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"

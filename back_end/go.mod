@@ -1,4 +1,4 @@
-module laptop-shop-api
+module laptop-shop
 
 go 1.22.2
 

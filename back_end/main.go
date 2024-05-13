@@ -5,11 +5,11 @@ import (
 	"os"
 	"path"
 
-	"laptop-shop-api/config"
-	"laptop-shop-api/database"
-	"laptop-shop-api/lib"
-	"laptop-shop-api/middleware"
-	"laptop-shop-api/routes"
+	"laptop-shop/config"
+	"laptop-shop/database"
+	"laptop-shop/lib"
+	"laptop-shop/middleware"
+	"laptop-shop/routes"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"

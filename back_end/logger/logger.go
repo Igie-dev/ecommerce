@@ -3,7 +3,7 @@ package logger
 import (
 	"os"
 
-	"laptop-shop-api/config"
+	"laptop-shop/config"
 
 	"github.com/sirupsen/logrus"
 )

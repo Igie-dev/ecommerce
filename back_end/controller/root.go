@@ -3,7 +3,7 @@ package controller
 import (
 	"strconv"
 
-	"laptop-shop-api/logger"
+	"laptop-shop/logger"
 
 	"github.com/gofiber/fiber/v2"
 )

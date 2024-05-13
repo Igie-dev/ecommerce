@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"laptop-shop-api/model"
+	"laptop-shop/model"
 
 	"github.com/google/uuid"
 )

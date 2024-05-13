@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"laptop-shop-api/controller"
+	"laptop-shop/controller"
 
 	"github.com/gofiber/fiber/v2"
 )

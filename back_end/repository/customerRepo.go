@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"laptop-shop-api/database"
-	"laptop-shop-api/model"
+	"laptop-shop/database"
+	"laptop-shop/model"
 
 	"github.com/google/uuid"
 	"gorm.io/gorm"
