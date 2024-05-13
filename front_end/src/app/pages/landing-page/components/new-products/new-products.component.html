@@ -9,7 +9,7 @@
   <!-- Mobile -->
   <div class="flex w-full py-1 overflow-x-auto h-fit scroll_bar_hidden">
     @for(product of products; track product.id){
-    <product-card [product]="product" />
+        <product-card [product]="product" />
     } @empty {
     <p>No new products</p>
     }

@@ -1,4 +1,4 @@
-<div class="h-[25rem] w-[18rem] flex flex-col gap-1 p-2">
+<div class="h-fit w-[16rem] lg:w-[18rem] flex flex-col justify-between gap-1 rounded-md transition-all border border-transparent p-2 hover:border-border hover:bg-primary-foreground">
   @if(product.isStock){
   <span class="flex items-center gap-2 text-green-500">
     <lucide-icon name="check" [size]="15" [strokeWidth]="2.5"></lucide-icon>
@@ -13,31 +13,31 @@
   }
   <!-- Image -->
   <img
-    class="w-full h-[15rem] object-contain"
+    class="w-full h-[10rem] object-cover border mt-2"
     loading="lazy"
     alt="Product image"
     src="assets/card_img.jpg"
   />
 
-  <div class="flex flex-col flex-1 w-full gap-1">
+  <div class="flex flex-col flex-1 w-full h-[20rem] gap-1">
     <div class="flex items-center w-full h-8 gap-4">
-      <p class="text-sm opacity-50">Reviews ({{ product.reviews }})</p>
+      <p class="text-xs opacity-50 lg:text-sm">Reviews ({{ product.reviews }})</p>
     </div>
-    <h1 class="text-sm h-[4rem] w-full">
+    <h1 class="w-full text-xs lg:text-sm ">
       @if(product.description.length > 90){
       {{ product.description | slice : 0 : 90 }} ... } @else {
       {{ product.description }} }
     </h1>
-    <div class="flex flex-col justify-end flex-1 w-full">
+    <div class="flex flex-col justify-end w-full mt-2 h-fit">
       @if(product.discount_price){
-      <p class="text-sm line-through opacity-50">
+      <p class="text-xs line-through opacity-50">
         {{ product.price | currency : "PHP" : "symbol" }}
       </p>
-      <p class="text-lg font-semibold">
+      <p class="text-xs font-semibold lg:text-sm">
         {{ product.discount_price | currency : "PHP" : "symbol" }}
       </p>
       } @else {
-      <p class="mt-6 text-lg font-semibold">
+      <p class="mt-[15px] text-xs font-semibold lg:text-sm">
         {{ product.price | currency : "PHP" : "symbol" }}
       </p>
       }
