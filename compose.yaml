@@ -6,6 +6,8 @@ services:
     build: ./front_end
     ports: 
        - 4200:4200
+    networks:
+      - loptop_shop_network
     develop:
       watch: 
         - path: ./front_end/package*.json
@@ -20,6 +22,8 @@ services:
     build: ./back_end
     ports: 
        - 3000:3000
+    networks:
+      - loptop_shop_network
     develop:
       watch:
         - path: ./back_end
@@ -33,11 +37,12 @@ services:
   postgres:
     image: postgres:latest
     restart: always
-    container_name: postgres
     volumes:
      - loptop_shop:/var/lib/postgresql/data
     ports:
       - 5432:5432
+    networks:
+      - loptop_shop_network
     environment:
         POSTGRES_PASSWORD: postgres
         POSTGRES_DB: loptop_shop
@@ -48,6 +53,8 @@ services:
       - postgres
     ports:
       - 5050:5050
+    networks:
+       - loptop_shop_network
     environment:
       PGADMIN_LISTEN_PORT: 5050
       PGADMIN_DEFAULT_EMAIL: jrpogiyanyow@gmail.com
@@ -57,7 +64,9 @@ services:
       CSRF_COOKIE_SECURE : False
       SERVER_MODE : False
 
-
+networks:
+  loptop_shop_network:
+    driver: bridge
 
 volumes:
   loptop_shop:
