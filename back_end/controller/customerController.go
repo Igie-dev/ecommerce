@@ -26,7 +26,7 @@ func CreateCustomer(c *fiber.Ctx) error {
 	if err := validate.Struct(customer); err != nil {
 		// Return, if some fields are not valid.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"msg":    "invalid input found",
+			"msg":    "Invalid input found",
 			"errors": vldt.ValidatorErrors(err),
 		})
 	}
@@ -75,11 +75,13 @@ func GetCustomer(c *fiber.Ctx) error {
 	customerId := uuid.MustParse(ID)
 	customerRepo := repo.NewCustomerRepo(database.GetDB())
 	customer, err := customerRepo.Get(customerId)
-	if err != nil {
+	
+	if err != nil || customer == nil{
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "customer were not found",
+			"msg": "Customer were not found",
 		})
 	}
+
 	return c.JSON(fiber.Map{
 		"customer": dto.ToCustomer(customer),
 	})
@@ -92,9 +94,9 @@ func GetAllCustomers(c *fiber.Ctx) error {
 
 	customers, err := customerRepo.All(pageSize, uint(pageSize*(pageNo-1)))
 
-	if err != nil {
+	if err != nil || customers == nil{
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "customers were not found",
+			"msg": "No customer found",
 		})
 	}
 
@@ -116,7 +118,7 @@ func UpdateCustomer(c *fiber.Ctx) error {
 	_, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "customer were not found",
+			"msg": "Customer were not found",
 		})
 	}
 	customer := &model.UpdateCustomer{}
@@ -131,7 +133,7 @@ func UpdateCustomer(c *fiber.Ctx) error {
 	if err := validate.Struct(customer); err != nil {
 		// Return, if some fields are not valid.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"msg":    "invalid input found",
+			"msg":    "Invalid input found",
 			"errors": vldt.ValidatorErrors(err),
 		})
 	}
@@ -163,7 +165,7 @@ func DeleteCustomer(c *fiber.Ctx) error {
 	_, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "customer were not found",
+			"msg": "Customer were not found",
 		})
 	}
 
