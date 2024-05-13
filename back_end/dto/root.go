@@ -2,23 +2,23 @@ package dto
 
 import "laptop-shop-api/model"
 
-func ToUser(c *model.User) *model.User {
-	return &model.User{
+func ToCustomer(c *model.Customer) *model.Customer {
+	return &model.Customer{
 		ID:         c.ID,
 		CreatedAt:  c.CreatedAt,
 		UpdatedAt:  c.UpdatedAt,
 		Email:      c.Email,
 		FirstName:  c.FirstName,
 		LastName:   c.LastName,
-		UserId: c.UserId,
+		CustomerId: c.CustomerId,
 		Contact:    c.Contact,
 	}
 }
 
-func ToUsers(users []*model.User) []*model.User {
-	res := make([]*model.User, len(users))
-	for i, user := range users {
-		res[i] = ToUser(user)
+func ToCustomers(customers []*model.Customer) []*model.Customer {
+	res := make([]*model.Customer, len(customers))
+	for i, customer := range customers {
+		res[i] = ToCustomer(customer)
 	}
 	return res
 }

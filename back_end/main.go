@@ -39,7 +39,7 @@ func main() {
 
 	//user routes
 
-	routes.UserRoutes(app)
+	routes.CustomerRoutes(app)
 
 	// Define a middleware to handle all routes
 	app.Use(func(c *fiber.Ctx) error {

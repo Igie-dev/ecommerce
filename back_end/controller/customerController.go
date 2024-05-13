@@ -11,19 +11,19 @@ import (
 	"github.com/google/uuid"
 )
 
-// Create new user
-func CreateUser(c *fiber.Ctx) error {
-	user := &model.CreateUser{}
+// Create new customer
+func CreateCustomer(c *fiber.Ctx) error {
+	customer := &model.CreateCustomer{}
 
-	if err := c.BodyParser(user); err != nil {
+	if err := c.BodyParser(customer); err != nil {
 		// Return status 400 and error message.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"msg": err.Error(),
 		})
 	}
-	// Create a new validator for a User model.
+	// Create a new validator for a Customer model.
 	validate := vldt.NewValidator()
-	if err := validate.Struct(user); err != nil {
+	if err := validate.Struct(customer); err != nil {
 		// Return, if some fields are not valid.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"msg":    "invalid input found",
@@ -31,10 +31,10 @@ func CreateUser(c *fiber.Ctx) error {
 		})
 	}
 
-	userRepo := repo.NewUserRepo(database.GetDB())
-	// check user already exists
+	customerRepo := repo.NewCustomerRepo(database.GetDB())
+	// check customer already exists
 
-	exists, err := userRepo.Exists(user.Email)
+	exists, err := customerRepo.Exists(customer.Email)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"msg": err.Error(),
@@ -43,19 +43,19 @@ func CreateUser(c *fiber.Ctx) error {
 
 	if exists {
 		return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-			"msg": "User with this email  already exists",
+			"msg": "Customer with this email  already exists",
 		})
 	}
 
 	//Generate password
-	user.Password, _ = GeneratePasswordHash([]byte(user.Password))
-	if err := userRepo.Create(user); err != nil {
+	customer.Password, _ = GeneratePasswordHash([]byte(customer.Password))
+	if err := customerRepo.Create(customer); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"msg": err.Error(),
 		})
 	}
 
-	dbUser, err := userRepo.Get(user.UserId)
+	dbCustomer, err := customerRepo.Get(customer.CustomerId)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"msg": err.Error(),
@@ -63,84 +63,84 @@ func CreateUser(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{
-		"user": dto.ToUser(dbUser),
+		"customer": dto.ToCustomer(dbCustomer),
 	})
 
 }
 
-// Get one user
-func GetUser(c *fiber.Ctx) error {
+// Get one customer
+func GetCustomer(c *fiber.Ctx) error {
 	ID := c.Params("id")
 
-	userId := uuid.MustParse(ID)
-	userRepo := repo.NewUserRepo(database.GetDB())
-	user, err := userRepo.Get(userId)
+	customerId := uuid.MustParse(ID)
+	customerRepo := repo.NewCustomerRepo(database.GetDB())
+	customer, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "user were not found",
+			"msg": "customer were not found",
 		})
 	}
 	return c.JSON(fiber.Map{
-		"user": dto.ToUser(user),
+		"customer": dto.ToCustomer(customer),
 	})
 }
 
-// Get all user
-func GetAllUsers(c *fiber.Ctx) error {
+// Get all customer
+func GetAllCustomers(c *fiber.Ctx) error {
 	pageNo, pageSize := GetPagination(c)
-	userRepo := repo.NewUserRepo(database.GetDB())
+	customerRepo := repo.NewCustomerRepo(database.GetDB())
 
-	users, err := userRepo.All(pageSize, uint(pageSize*(pageNo-1)))
+	customers, err := customerRepo.All(pageSize, uint(pageSize*(pageNo-1)))
 
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "users were not found",
+			"msg": "customers were not found",
 		})
 	}
 
 	return c.JSON(fiber.Map{
 		"page":      pageNo,
 		"page_size": pageSize,
-		"count":     len(users),
-		"user":  dto.ToUsers(users),
+		"count":     len(customers),
+		"customer":  dto.ToCustomers(customers),
 	})
 }
 
-// Update a user
-func UpdateUser(c *fiber.Ctx) error {
+// Update a customer
+func UpdateCustomer(c *fiber.Ctx) error {
 	ID := c.Params("id")
 
-	userId := uuid.MustParse(ID)
+	customerId := uuid.MustParse(ID)
 
-	userRepo := repo.NewUserRepo(database.GetDB())
-	_, err := userRepo.Get(userId)
+	customerRepo := repo.NewCustomerRepo(database.GetDB())
+	_, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "user were not found",
+			"msg": "customer were not found",
 		})
 	}
-	user := &model.UpdateUser{}
-	if err := c.BodyParser(user); err != nil {
+	customer := &model.UpdateCustomer{}
+	if err := c.BodyParser(customer); err != nil {
 		// Return status 400 and error message.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"msg": err.Error(),
 		})
 	}
-	// Create a new validator for a User model.
+	// Create a new validator for a Customer model.
 	validate := vldt.NewValidator()
-	if err := validate.Struct(user); err != nil {
+	if err := validate.Struct(customer); err != nil {
 		// Return, if some fields are not valid.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"msg":    "invalid input found",
 			"errors": vldt.ValidatorErrors(err),
 		})
 	}
-	if err := userRepo.Update(userId, user); err != nil {
+	if err := customerRepo.Update(customerId, customer); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"msg": err.Error(),
 		})
 	}
-	dbUser, err := userRepo.Get(userId)
+	dbCustomer, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"msg": err.Error(),
@@ -148,26 +148,26 @@ func UpdateUser(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{
-		"user": dto.ToUser(dbUser),
+		"customer": dto.ToCustomer(dbCustomer),
 	})
 }
 
-// Delete a user
-func DeleteUser(c *fiber.Ctx) error {
+// Delete a customer
+func DeleteCustomer(c *fiber.Ctx) error {
 	ID := c.Params("id")
 
-	userId := uuid.MustParse(ID)
+	customerId := uuid.MustParse(ID)
 
-	userRepo := repo.NewUserRepo(database.GetDB())
+	customerRepo := repo.NewCustomerRepo(database.GetDB())
 
-	_, err := userRepo.Get(userId)
+	_, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "user were not found",
+			"msg": "customer were not found",
 		})
 	}
 
-	err = userRepo.Delete(userId)
+	err = customerRepo.Delete(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"msg": err.Error(),

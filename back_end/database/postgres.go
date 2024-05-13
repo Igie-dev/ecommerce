@@ -28,7 +28,7 @@ func (db *DB) connection(config *config.DBConfig) (err error) {
 		return err
 	}
 
-	db.AutoMigrate(&model.User{})
+	db.AutoMigrate(&model.Customer{})
 
 
 	return nil
