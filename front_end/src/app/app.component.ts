@@ -13,7 +13,6 @@ import { MainFooterComponent } from './shared/mainFooter/main-footer/main-footer
     MainFooterComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'front_end';

@@ -7,11 +7,15 @@
   </div>
 
   <!-- Mobile -->
-  <div class="flex w-full py-1 overflow-x-auto h-fit scroll_bar_hidden">
-    @for(product of products; track product.id){
+  <div class="w-full h-fit">
+    <app-horizontal-scroll-container>
+@for(product of products; track product.id){
         <product-card [product]="product" />
     } @empty {
     <p>No new products</p>
     }
+
+    </app-horizontal-scroll-container>
+
   </div>
 </div>

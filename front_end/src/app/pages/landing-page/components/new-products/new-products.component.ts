@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { ProductCardComponent } from '../../../../shared/product-card/product-card.component';
+import { HorizontalScrollContainerComponent } from '../../../../shared/horizontal-scroll-container/horizontal-scroll-container.component';
 @Component({
   selector: 'lading-page-new-products',
   standalone: true,
-  imports: [ProductCardComponent],
+  imports: [ProductCardComponent, HorizontalScrollContainerComponent],
   templateUrl: './new-products.component.html',
   styles: `
   .scroll_bar_hidden::-webkit-scrollbar {

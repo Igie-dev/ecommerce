@@ -12,6 +12,8 @@ import {
   Menu,
   Phone,
   Check,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-angular';
 
 export const appConfig: ApplicationConfig = {
@@ -27,6 +29,8 @@ export const appConfig: ApplicationConfig = {
         Menu,
         Phone,
         Check,
+        ChevronLeft,
+        ChevronRight,
       })
     ),
   ],

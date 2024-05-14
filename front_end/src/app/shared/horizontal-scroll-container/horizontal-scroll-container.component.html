@@ -1,0 +1,15 @@
+<div class="horizontal_scroll_container">
+  <div #scrollArrowLeftContainer class="btn_wrapper_left">
+   <button (click)="handleLeftBtnClick()" class="left-arrow">
+  <lucide-icon name="chevron-left" size="25"></lucide-icon>
+</button>
+  </div>
+<ul #scrollListWrapper (scroll)="onScroll($event)">
+ <ng-content/>
+</ul>
+<div #scrollArrowRightContainer class="btn_wrapper_right show_btn_container">
+  <button (click)="handleRightBtnClick()" class="right-arrow">
+  <lucide-icon name="chevron-right" size="25"></lucide-icon>
+</button>
+</div>
+</div>
