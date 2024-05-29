@@ -7,7 +7,8 @@ services:
     ports: 
        - 4200:4200
     networks:
-      - loptop_shop_network
+      loptop_shop_network:
+        ipv4_address: 172.5.0.6
     develop:
       watch: 
         - path: ./front_end/package*.json
@@ -23,7 +24,9 @@ services:
     ports: 
        - 3000:3000
     networks:
-      - loptop_shop_network
+      loptop_shop_network:
+        ipv4_address: 172.5.0.5
+
     develop:
       watch:
         - path: ./back_end
@@ -42,7 +45,9 @@ services:
     ports:
       - 5432:5432
     networks:
-      - loptop_shop_network
+      loptop_shop_network:
+        ipv4_address: 172.5.0.4
+
     environment:
         POSTGRES_PASSWORD: postgres
         POSTGRES_DB: loptop_shop
@@ -67,6 +72,9 @@ services:
 networks:
   loptop_shop_network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.5.0.0/16
 
 volumes:
   loptop_shop:

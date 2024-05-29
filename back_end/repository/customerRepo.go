@@ -19,19 +19,34 @@ func NewCustomerRepo(db *database.DB) CustomerRepository {
 	return &CustomerRepo{db}
 }
 
-func (repo *CustomerRepo) Create(b *model.CreateCustomer) error {
+func (repo *CustomerRepo) Create(b *model.CreateCustomer)(*model.Customer, error ){
 	u := uuid.New()
 	//Create customer from data and add cutomer id by generating randum string
 	customer := model.Customer{
 		CustomerId: u,
 	}
-	err := repo.db.Create(&customer).Error
-	return err
+	var err error;
+
+	err = repo.db.Create(&customer).Error;
+
+	if err != nil{
+		return nil, err;
+	}
+
+	createdCustomer := model.Customer{}
+
+	query := "SELECT * EXCEPT(password) FROM customers WHERE customer_id = ?"
+
+	result := repo.db.Raw(query, u).Scan(&createdCustomer);
+
+	err = result.Error
+
+	return &createdCustomer, err;
 }
 
 func (repo *CustomerRepo) All(limit int, offset uint) ([]*model.Customer, error) {
 	var customers []*model.Customer
-	query := `SELECT * FROM customers`
+	query := `SELECT * EXCEPT(password) FROM customers`
 	var err error
 
 	if limit > 0 && offset > 0 {
@@ -48,7 +63,7 @@ func (repo *CustomerRepo) All(limit int, offset uint) ([]*model.Customer, error)
 
 func (repo *CustomerRepo) Get(ID uuid.UUID) (*model.Customer, error) {
 	customer := model.Customer{}
-	query := `SELECT * FROM customer WHERE customer_id = ?`
+	query := `SELECT * EXCEPT(password) FROM customer WHERE customer_id = ?`
 	result := repo.db.Raw(query, ID).Scan(&customer)
 	err := result.Error
 	return &customer, err
@@ -85,11 +100,9 @@ func (repo *CustomerRepo) Exists(email string) (bool, error) {
 	query := `SELECT customer_id FROM "customer" WHERE email = ?`
 
 	var exists bool
-	query = fmt.Sprintf("SELECT exists (%s)", query)
 	result := repo.db.Raw(query, email).Scan(&exists)
-
 	if result.Error != nil {
-		return false, nil
+		return false, result.Error
 	}
 
 	return exists, nil

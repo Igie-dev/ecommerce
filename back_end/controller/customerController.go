@@ -18,7 +18,7 @@ func CreateCustomer(c *fiber.Ctx) error {
 	if err := c.BodyParser(customer); err != nil {
 		// Return status 400 and error message.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"msg": err.Error(),
+			"message": err.Error(),
 		})
 	}
 	// Create a new validator for a Customer model.
@@ -26,7 +26,7 @@ func CreateCustomer(c *fiber.Ctx) error {
 	if err := validate.Struct(customer); err != nil {
 		// Return, if some fields are not valid.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"msg":    "Invalid input found",
+			"message":    "Invalid input found",
 			"errors": vldt.ValidatorErrors(err),
 		})
 	}
@@ -37,33 +37,29 @@ func CreateCustomer(c *fiber.Ctx) error {
 	exists, err := customerRepo.Exists(customer.Email)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"msg": err.Error(),
+			"message": err.Error(),
 		})
 	}
 
 	if exists {
 		return c.Status(fiber.StatusConflict).JSON(fiber.Map{
-			"msg": "Customer with this email  already exists",
+			"message": "Customer with this email  already exists",
 		})
 	}
 
-	//Generate password
-	customer.Password, _ = GeneratePasswordHash([]byte(customer.Password))
-	if err := customerRepo.Create(customer); err != nil {
-		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"msg": err.Error(),
-		})
-	}
+	//Hash password
+	customer.Password, _ = GeneratePasswordHash([]byte(customer.Password));
 
-	dbCustomer, err := customerRepo.Get(customer.CustomerId)
+	 result, err := customerRepo.Create(customer); 
+
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"msg": err.Error(),
+			"message": err.Error(),
 		})
 	}
 
 	return c.JSON(fiber.Map{
-		"customer": dto.ToCustomer(dbCustomer),
+		"customer": dto.ToCustomer(result),
 	})
 
 }
@@ -78,7 +74,7 @@ func GetCustomer(c *fiber.Ctx) error {
 	
 	if err != nil || customer == nil{
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "Customer were not found",
+			"message": "Customer were not found",
 		})
 	}
 
@@ -96,7 +92,7 @@ func GetAllCustomers(c *fiber.Ctx) error {
 
 	if err != nil || customers == nil{
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "No customer found",
+			"message": "No customer found",
 		})
 	}
 
@@ -118,14 +114,14 @@ func UpdateCustomer(c *fiber.Ctx) error {
 	_, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "Customer were not found",
+			"message": "Customer were not found",
 		})
 	}
 	customer := &model.UpdateCustomer{}
 	if err := c.BodyParser(customer); err != nil {
 		// Return status 400 and error message.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"msg": err.Error(),
+			"message": err.Error(),
 		})
 	}
 	// Create a new validator for a Customer model.
@@ -133,19 +129,19 @@ func UpdateCustomer(c *fiber.Ctx) error {
 	if err := validate.Struct(customer); err != nil {
 		// Return, if some fields are not valid.
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"msg":    "Invalid input found",
+			"message":    "Invalid input found",
 			"errors": vldt.ValidatorErrors(err),
 		})
 	}
 	if err := customerRepo.Update(customerId, customer); err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"msg": err.Error(),
+			"message": err.Error(),
 		})
 	}
 	dbCustomer, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"msg": err.Error(),
+			"message": err.Error(),
 		})
 	}
 
@@ -165,14 +161,14 @@ func DeleteCustomer(c *fiber.Ctx) error {
 	_, err := customerRepo.Get(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"msg": "Customer were not found",
+			"message": "Customer were not found",
 		})
 	}
 
 	err = customerRepo.Delete(customerId)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-			"msg": err.Error(),
+			"message": err.Error(),
 		})
 	}
 

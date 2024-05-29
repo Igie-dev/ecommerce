@@ -7,7 +7,7 @@ import (
 )
 
 type CustomerRepository interface {
-	Create(b *model.CreateCustomer) error
+	Create(b *model.CreateCustomer) (*model.Customer, error)
 	All(limit int, offset uint) ([]*model.Customer, error)
 	Get(ID uuid.UUID) (*model.Customer, error)
 	Exists(email string) (bool, error)
