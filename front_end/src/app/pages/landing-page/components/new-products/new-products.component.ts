@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ProductCardComponent } from '../../../../shared/product-card/product-card.component';
-import { HorizontalScrollContainerComponent } from '../../../../shared/horizontal-scroll-container/horizontal-scroll-container.component';
+import { ProductCardComponent } from '../../../../shared/components/product-card/product-card.component';
+import { HorizontalScrollContainerComponent } from '../../../../shared/components/horizontal-scroll-container/horizontal-scroll-container.component';
 @Component({
   selector: 'lading-page-new-products',
   standalone: true,

@@ -28,16 +28,16 @@
     ],
     "paths": {
       "@spartan-ng/ui-button-helm": [
-        "./src/app/shared/ui/ui-button-helm/src/index.ts"
+        "./src/app/shared/components/ui/ui-button-helm/src/index.ts"
       ],
       "@spartan-ng/ui-carousel-helm": [
-        "./src/app/shared/ui/ui-carousel-helm/src/index.ts"
+        "./src/app/shared/components/ui/ui-carousel-helm/src/index.ts"
       ],
       "@spartan-ng/ui-menu-helm": [
-        "./src/app/shared/ui/ui-menu-helm/src/index.ts"
+        "./src/app/shared/components/ui/ui-menu-helm/src/index.ts"
       ],
       "@spartan-ng/ui-icon-helm": [
-        "./src/app/shared/ui/ui-icon-helm/src/index.ts"
+        "./src/app/shared/components/ui/ui-icon-helm/src/index.ts"
       ]
     }
   },
